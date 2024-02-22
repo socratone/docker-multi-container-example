@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" />
+    <button>Click</button>
+    <script>
+      const input = document.querySelector('input');
+
+      const button = document.querySelector('button');
+      button.addEventListener('click', async () => {
+        const res = await fetch('http://localhost:3000/api/todos');
+        const text = await res.text();
+        document.body.insertAdjacentHTML('beforeend', `<p>${input.value}</p>`);
+      });
+    </script>
+  </body>
+</html>
