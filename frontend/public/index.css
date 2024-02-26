@@ -1,0 +1,13 @@
+body {
+  min-height: 100vh;
+  margin: 3rem;
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+.input-container {
+  display: flex;
+  gap: 0.5rem;
+}
