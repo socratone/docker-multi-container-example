@@ -3,20 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 3rem;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+      }
+
+      .input-container {
+        display: flex;
+        gap: 0.5rem;
+      }
+    </style>
     <title>Document</title>
   </head>
   <body>
-    <input type="text" />
-    <button>Click</button>
+    <div class="input-container">
+      <input type="text" />
+      <button>Click</button>
+    </div>
+    <ul></ul>
     <script>
-      const input = document.querySelector('input');
+      const BASE_URL = 'http://localhost:3001/api';
 
+      const input = document.querySelector('input');
+      const list = document.querySelector('ul');
       const button = document.querySelector('button');
       button.addEventListener('click', async () => {
-        const res = await fetch('http://localhost:3000/api/todos');
-        const text = await res.text();
-        document.body.insertAdjacentHTML('beforeend', `<p>${input.value}</p>`);
+        try {
+          const res = await fetch(BASE_URL + '/todos', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: input.value }),
+          });
+
+          list.insertAdjacentHTML('beforeend', `<li>${input.value}</li>`);
+        } catch {
+          console.error('error');
+        }
       });
+
+      (async () => {
+        try {
+          const res = await fetch(BASE_URL + '/todos');
+          const data = await res.json();
+          data.forEach(todo => {
+            list.insertAdjacentHTML('beforeend', `<li>${todo.text}</li>`);
+          });
+        } catch {
+          console.error('error');
+        }
+      })();
     </script>
   </body>
 </html>
