@@ -1,3 +1,5 @@
+const DOCKER_CONTAINER_NAME = 'mongodb-app';
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -62,8 +64,7 @@ app.delete('/api/todos/:id', async (req, res) => {
 
 const main = async () => {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/todos');
-
+    await mongoose.connect(`mongodb://${DOCKER_CONTAINER_NAME}/todos`);
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
     });
