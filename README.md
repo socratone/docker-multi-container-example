@@ -51,8 +51,9 @@ docker run --rm -d -p 80:80 --network example-network --name backend-app backend
 ### 콘테이너 실행
 
 official 이미지인 `mongo`를 이용한다.\
-코드를 보면 backend에서 mongodb에 접속시 `mongodb-app`이라는 이름을 사용한다.
+코드를 보면 backend에서 mongodb에 접속시 `mongodb-app`이라는 이름을 사용한다.\
+데이터 유지를 위해 volume도 사용한다.
 
 ```
-docker run --rm -d --network example-network --name mongodb-app mongo
+docker run --rm -d -v data:/data/db --network example-network --name mongodb-app mongo
 ```
