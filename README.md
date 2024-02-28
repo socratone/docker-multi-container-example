@@ -24,7 +24,7 @@ docker build -t frontend-image ./frontend
 ### 콘테이너 실행
 
 ```
-docker run --rm -d -p 3000:3000 --network example-network --name frontend-app frontend-image
+docker run --rm -d -p 3000:3000 --name frontend-app frontend-image
 ```
 
 ## Backend
@@ -39,8 +39,11 @@ docker build -t backend-image ./backend
 
 ### 콘테이너 실행
 
+frontend에서 기본 포트(80)로 요청이 들어오기 때문에 80 포트를 설정하고\
+mongodb database와 연결하기 위해 동일한 network를 설정한다.
+
 ```
-docker run --rm -d -p 3001:3001 --network example-network --name backend-app backend-image
+docker run --rm -d -p 80:80 --network example-network --name backend-app backend-image
 ```
 
 ## Mongodb Database
@@ -48,8 +51,8 @@ docker run --rm -d -p 3001:3001 --network example-network --name backend-app bac
 ### 콘테이너 실행
 
 official 이미지인 `mongo`를 이용한다.\
-코드를 보면 backend에서 mongodb에 접속시 `mongodb-app`라는 이름을 사용한다.
+코드를 보면 backend에서 mongodb에 접속시 `mongodb-app`이라는 이름을 사용한다.
 
 ```
-docker run --rm -d -p 27017:27017 --network example-network --name mongodb-app mongo
+docker run --rm -d --network example-network --name mongodb-app mongo
 ```

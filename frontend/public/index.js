@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001/api';
+const BASE_URL = 'http://localhost/api';
 
 const input = document.querySelector('input');
 const ul = document.querySelector('ul');
