@@ -1,0 +1,27 @@
+version: '3.8'
+# 같은 services를 부모로 둔 경우 자동으로 동일한 network가 설정된다.
+services:
+  # container 이름
+  mongodb-app:
+    # 사용하려는 이미지
+    image: 'mongo'
+    volumes:
+      - data:/data/db
+  backend-app:
+    # 이미지 정보가 있는 Dockerfile의 위치를 알려준다.
+    build: ./backend
+    ports:
+      - '80:80'
+    depends_on:
+      # backend-app이 실행되기 전에 mongodb-app이 실행되어야 한다.
+      - mongodb-app
+  frontend-app:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend-app
+
+# named volume은 아래처럼 명시해줘야 한다.
+volumes:
+  data:

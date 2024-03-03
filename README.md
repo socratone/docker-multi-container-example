@@ -57,3 +57,22 @@ official 이미지인 `mongo`를 이용한다.\
 ```
 docker run --rm -d -v data:/data/db --network example-network --name mongodb-app mongo
 ```
+
+## Docker Compose
+
+`docker-compose.yml`을 설정해서 위의 모든 명령어를 대체할 수 있다.
+
+### 모든 콘테이너 실행
+
+`docker-compose.yml`에 설정한 대로 모든 콘테이너를 실행한다.\
+`--build` 옵션을 넣을 경우 강제로 이미지를 재빌드한다.
+
+```
+docker-compose up
+```
+
+## 모든 콘테이너 종료
+
+```
+docker-compose down
+```
